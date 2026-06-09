@@ -514,6 +514,17 @@
       });
 
       updateHeader();
+            inputField.addEventListener("input", () => {
+        inputField.style.height = "auto";
+        inputField.style.height = inputField.scrollHeight + "px";
+      });
+
+      window.addEventListener("beforeunload", () => {
+        navigator.sendBeacon("/logout_on_reload");
+      });
+
+      loadChat();
+    });
       loadChat();
     });
   </script>
