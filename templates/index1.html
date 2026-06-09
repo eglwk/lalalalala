@@ -188,12 +188,17 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const messagesContainer = document.querySelector(".chat-messages");
-      const inputField = document.querySelector(".input-field");
-      const sendButton = document.querySelector(".send-button");
+     const messagesContainer = document.querySelector(".chat-messages");
+const inputField = document.querySelector(".input-field");
+const sendButton = document.querySelector(".send-button");
+const subtitleElement = document.querySelector(".header-subtitle");
 
-      let isSending = false;
-      let typingIndicator = null;
+let isSending = false;
+let typingIndicator = null;
+
+let currentStudyDay = 1;
+let maxStudyDay = 5;
+let chatExpired = false;
 
       function scrollToBottom() {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -253,6 +258,21 @@
         }
       }
 
+      function setInputDisabled(disabled) {
+  inputField.disabled = disabled;
+  sendButton.disabled = disabled;
+}
+
+function updateHeader() {
+  subtitleElement.textContent = `Tag ${currentStudyDay} von ${maxStudyDay}`;
+}
+
+function finishClosedChat() {
+  chatExpired = true;
+  setInputDisabled(true);
+  inputField.placeholder = "Das heutige Gespräch ist beendet. Du kannst morgen mit dem nächsten Thema fortfahren.";
+}
+
       async function loadChat() {
         try {
           const response = await fetch("/load_chat");
@@ -265,17 +285,27 @@
             return;
           }
 
-          if (data.chat_history && data.chat_history.length > 0) {
-            data.chat_history.forEach(msg => {
-              if (msg.role === "user") {
-                addUserMessage(msg.content);
-              } else if (msg.role === "assistant") {
-                addBotMessage(msg.content);
-              }
-            });
-          } else {
-            addBotMessage("Hallo! Schön, dass du da bist. Womit kann ich dir helfen?");
-          }
+        if (data.study_day) currentStudyDay = Number(data.study_day);
+if (data.max_study_day) maxStudyDay = Number(data.max_study_day);
+updateHeader();
+
+if (data.chat_history && data.chat_history.length > 0) {
+  data.chat_history.forEach(msg => {
+    if (msg.role === "user") {
+      addUserMessage(msg.content);
+    } else if (msg.role === "assistant") {
+      addBotMessage(msg.content);
+    }
+  });
+} else if (data.reply) {
+  addBotMessage(data.reply);
+} else {
+  addBotMessage("Hallo, ich bin Lumi. Ich wurde als Chat-Bot für Themen aus dem Bereich psychische Gesundheit entwickelt. Ich werde dich in den nächsten Tagen ein Stück begleiten und mit dir über Themen rund um psychische Gesundheit, Stress und Wohlbefinden sprechen. Du kannst dabei ganz offen erzählen, was dich beschäftigt, was dir guttut oder was dir vielleicht gerade schwerfällt. Wer bist Du und wie geht es Dir heute?");
+}
+
+if (data.expired) {
+  finishClosedChat();
+}
 
         } catch (error) {
           console.error(error);
@@ -286,8 +316,7 @@
       async function sendMessage() {
         const userMessage = inputField.value.trim();
 
-        if (userMessage === "" || isSending) return;
-
+if (userMessage === "" || isSending || chatExpired) return;
         isSending = true;
         sendButton.disabled = true;
         inputField.disabled = true;
@@ -312,11 +341,23 @@
           const data = await response.json();
           removeTypingIndicator();
 
-          if (!response.ok) {
-            addBotMessage(data.error || "Serverfehler.");
-          } else {
-            addBotMessage(data.reply);
-          }
+       if (data.study_day) currentStudyDay = Number(data.study_day);
+if (data.max_study_day) maxStudyDay = Number(data.max_study_day);
+updateHeader();
+
+if (!response.ok) {
+  addBotMessage(data.error || "Serverfehler.");
+  if (data.expired) {
+    finishClosedChat();
+  }
+} else {
+  if (data.reply) {
+    addBotMessage(data.reply);
+  }
+  if (data.expired) {
+    finishClosedChat();
+  }
+}
 
         } catch (error) {
           removeTypingIndicator();
@@ -355,10 +396,10 @@
       <img src="/static/chattiHFI.png" alt="Chatti">
 
       <div class="header-text">
-        <div class="header-title">Chatti</div>
-        <div class="header-subtitle">
-          Eingeloggt als: {{ username }} 
-        </div>
+      <div class="header-title">Lumi</div>
+<div class="header-subtitle">
+  Tag 1 von 5
+</div>
       </div>
 
       <button class="logout-button" type="button" onclick="window.location.href='/logout'">
