@@ -555,13 +555,22 @@ def get_system_prompt(study_day, chat_history=None):
 
     return COMMON_HIGH_SELF_DISCLOSURE_PROMPT + "\n\n" + day_prompt
 
-
 def get_initial_assistant_message(study_day, chat_history=None):
     study_day = int(study_day)
     memory = load_participant_memory()
+
+    # Name bevorzugt aus der Memory nehmen.
+    # Falls dort noch keiner steht, aus der bisherigen Chat-History ableiten.
     name = memory.get("preferred_name") or get_preferred_name_from_history(chat_history or [])
-    name_part = f", {name}" if name and study_day > 1 else ""
-    return INITIAL_ASSISTANT_MESSAGES.get(study_day, INITIAL_ASSISTANT_MESSAGES[1]).replace("{NAME_PART}", name_part)
+
+    # Wichtig: Nur der reine Name, kein zusätzliches Komma.
+    name_part = name if name else ""
+
+    return (
+        INITIAL_ASSISTANT_MESSAGES
+        .get(study_day, INITIAL_ASSISTANT_MESSAGES[1])
+        .replace("{NAME_PART}", name_part)
+    )
 
 
 def ask_mistral(chat_history, study_day):
@@ -722,13 +731,19 @@ def load_chat():
         if not chat_history:
             now = utc_now_iso()
             reply = get_initial_assistant_message(study_day, chat_history)
-            chat_history.append({
-                "role": "assistant",
-                "content": reply,
-                "timestamp": now,
-                "chat_started_at": now,
-                "study_day": study_day
-            })
+initial_entry = {
+    "role": "assistant",
+    "content": reply,
+    "timestamp": now,
+    "study_day": study_day
+}
+
+if int(study_day) == 5:
+    initial_entry["conversation_closed_at"] = now
+    initial_entry["is_closing_message"] = True
+
+chat_history.append(initial_entry)
+
             save_chat_history_to_seafile(chat_history, study_day)
 
         # An den Browser wird nur der aktuelle Tag zurückgegeben.
