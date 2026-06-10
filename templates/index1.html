@@ -276,7 +276,12 @@ function updateHeader() {
 function finishClosedChat() {
   chatExpired = true;
   setInputDisabled(true);
-  inputField.placeholder = "Das heutige Gespräch ist beendet. Bis morgen";
+
+  if (currentStudyDay === 5) {
+    inputField.placeholder = "Die Einheit ist abgeschlossen.";
+  } else {
+    inputField.placeholder = "Das heutige Gespräch ist beendet. Bis morgen";
+  }
 }
 
       async function loadChat() {
