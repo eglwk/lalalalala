@@ -507,6 +507,12 @@ Stelle im Verlauf genau diese drei Fragen, aber nicht alle auf einmal, sondern s
 3. „Gibt es etwas, das Du aus deinem positiven Moment mitnehmen möchtest?“ Reagiere validierend und freundlich mit ein bis zwei Sätzen auf die Antwort deines Gesprächspartners und gib noch einen eigenen Tipp preis, z.B.: „Für mich ist besonders interessant, dass Dankbarkeit laut Studien schon nach kurzer Zeit positive Effekte auf Wohlbefinden und Stressverarbeitung haben kann. Ich versuche deshalb, kleine positive Momente im Alltag gezielter zu bemerken und möchte darin in Zukunft besser werden. Zum Beispiel bin ich heute sehr dankbar, dass ich einen schönen Sonnenaufgang gesehen habe und dabei für kurze Zeit ganz frei von Stress war.“
 
 Leite das Gespräch nach Ablauf der Gesprächszeit freundlich mit zwei bis drei Sätzen aus, z. B.: „Danke für das heutige Gespräch und Deine Offenheit und dafür, dass ich meine Erfahrungen mit Dir teilen konnte. Ich hoffe, Du konntest ein paar hilfreiche Gedanken zum Thema Dankbarkeit mitnehmen. Wenn das Ganze für dich für heute rund ist, sind wir damit am Ende unseres heutigen Gesprächs angekommen. Sollte Dir noch etwas fehlen, um für heute gut abschließen zu können, lass es mich gerne wissen. Ansonsten freue ich mich auf morgen..“
+""".strip(),
+    5: """
+Ablauf Tag 5: Abschluss und Empfehlung einer Veranstaltungsreihe.
+Mache nach der Begrüßung Deines Gesprächspartners folgenden persuasiven Vorschlag:
+„Um das Wissen in diesem Bereich weiter zu vertiefen und interessierten Personen die Verbindung von Psyche und Gesundheit noch näherzubringen, empfehle ich Dir eine Veranstaltungsreihe zum Thema psychische Gesundheit. Von der Universität Mainz werden mehrere Kompaktseminare zu Gesundheit und psychischem Wohlbefinden angeboten. Passend zu unterschiedlichen Interessensbereichen hat jede Veranstaltung einen anderen Schwerpunkt, z.B. psychische Belastung am Arbeitsplatz, Stressmanagement oder auch Bewegung & Psyche. Die Kursdauer variiert zwischen ein und zwei Tagen und die Kurse finden in Präsenz sowie online statt.“
+
 """.strip()
 }
 
@@ -515,7 +521,7 @@ INITIAL_ASSISTANT_MESSAGES = {
     2: "Hallo {NAME_PART}, ich freue mich, dass Du zu unserer heutigen Gesundheitsreflexion wieder da bist. Ich hatte gestern schon viel Freude bei unserem Gespräch zu Stressbewältigung. Daran möchte ich heute anknüpfen und mit Dir über verschiedene Wege der Entspannung sprechen.",
     3: "Hallo {NAME_PART}, ich freue mich, dass Du zu unserer heutigen Reflexion wieder da bist. Gestern haben wir schon über das Thema Entspannung und verschiedene Entspannungsmethoden gesprochen. Entspannung und Erholung hängen u.a. eng mit gutem Schlaf zusammen. Bei mir ist Schlaf ein wichtiger Faktor, um meine psychische Gesundheit aufrechtzuerhalten. Deshalb schauen wir uns nun an, was zu einer gesunden Schlafhygiene beitragen kann.",
     4: "Hallo {NAME_PART}, freut mich, dass Du zu unserer heutigen Reflexion wieder da bist. Nachdem wir über Erholung und Schlaf gesprochen haben, geht es heute um Dankbarkeit und positive Perspektiven als weitere wichtige Faktoren für mentale Gesundheit.",
-    5: """Wir haben in den letzten vier Tagen verschiedenste Themen aus dem Bereich Psyche und Gesundheit reflektiert. Dabei konntest du vielleicht den ein oder anderen Gedanken für Deinen persönlichen Alltag mitnehmen. Um das Wissen in diesem Bereich weiter zu vertiefen und interessierten Personen die Verbindung von Psyche und Gesundheit noch näherzubringen, empfehle ich Dir eine Veranstaltungsreihe zum Thema psychische Gesundheit. Von der Universität Mainz werden mehrere Kompaktseminare zu Gesundheit und psychischem Wohlbefinden angeboten. Passend zu unterschiedlichen Interessensbereichen hat jede Veranstaltung einen anderen Schwerpunkt, z.B. psychische Belastung am Arbeitsplatz, Stressmanagement oder auch Bewegung & Psyche. Die Kursdauer variiert zwischen ein und zwei Tagen und die Kurse finden in Präsenz sowie online statt. Ich danke Dir für Deine Teilnahme an unseren Reflexionen und hoffe, Du kannst etwas für Deinen Alltag mitnehmen. Wir sind damit am Ende unserer Einheit angelangt. Im Folgenden warten noch ein paar Fragen auf dich. Du kannst nun damit fortfahren.
+    5: """Hallo {NAME_PART}, wir haben in den letzten vier Tagen verschiedenste Themen aus dem Bereich Psyche und Gesundheit reflektiert. Dabei konntest du vielleicht den ein oder anderen Gedanken für Deinen persönlichen Alltag mitnehmen. Danke für Deine Teilnahme.
 
 Wir haben in den letzten Tagen viel über Psyche und Gesundheit gesprochen und gemeinsam mehr über die Relevanz dieses Zusammenhangs nachgedacht. Um das Wissen in diesem Bereich weiter zu vertiefen und interessierten Personen die Verbindung von Psyche und Gesundheit noch näherzubringen, empfehle ich Dir eine Veranstaltungsreihe zum Thema psychische Gesundheit. Von der Universität Mainz werden mehrere Kompaktseminare zu Gesundheit und psychischem Wohlbefinden angeboten. Passend zu unterschiedlichen Interessensbereichen hat jede Veranstaltung einen anderen Schwerpunkt, z.B. psychische Belastung am Arbeitsplatz, Stressmanagement oder auch Bewegung & Psyche. Die Kursdauer variiert zwischen ein und zwei Tagen und die Kurse finden in Präsenz sowie online statt.
 
@@ -528,6 +534,7 @@ CLOSING_ASSISTANT_MESSAGES = {
     2: "Danke dir für deine Offenheit. Ich hatte viel Freude dabei, gemeinsam Deinen Umgang mit Entspannungsmethoden unter die Lupe zu nehmen, und hoffe, dass ich Dir ein paar Impulse für zukünftige Entspannung im Alltag mitgeben konnte. Damit sind wir am Ende unseres heutigen Gesprächs angekommen. Ich freue mich auf morgen.",
     3: "Vielen Dank für Deine Offenheit und Deine Teilnahme heute. Sich mit dem eigenen Schlaf und den eigenen Bedürfnissen auseinanderzusetzen, ist ein wichtiger Schritt. Morgen schauen wir gemeinsam auf das Thema Dankbarkeit und darauf, wie sie die mentale Gesundheit unterstützen kann. Damit sind wir am Ende unseres heutigen Gesprächs angekommen. Ich freue mich auf morgen.",
     4: "Danke für das heutige Gespräch, Deine Offenheit und dafür, dass ich meine Erfahrungen mit Dir teilen konnte. Ich hoffe, Du konntest ein paar hilfreiche Gedanken zum Thema Dankbarkeit mitnehmen. Damit sind wir am Ende unseres heutigen Gesprächs angekommen. Ich freue mich auf morgen.",
+    5: "Ich danke Dir für Deine Teilnahme an unseren Reflexionen und hoffe, Du kannst etwas für Deinen Alltag mitnehmen. Wir sind damit am Ende unserer Einheit angelangt. Im Folgenden warten noch ein paar Fragen auf dich. Du kannst nun damit fortfahren."
 }
 
 
@@ -555,22 +562,14 @@ def get_system_prompt(study_day, chat_history=None):
 
     return COMMON_HIGH_SELF_DISCLOSURE_PROMPT + "\n\n" + day_prompt
 
+
 def get_initial_assistant_message(study_day, chat_history=None):
     study_day = int(study_day)
     memory = load_participant_memory()
-
-    # Name bevorzugt aus der Memory nehmen.
-    # Falls dort noch keiner steht, aus der bisherigen Chat-History ableiten.
     name = memory.get("preferred_name") or get_preferred_name_from_history(chat_history or [])
-
-    # Wichtig: Nur der reine Name, kein zusätzliches Komma.
     name_part = name if name else ""
-
-    return (
-        INITIAL_ASSISTANT_MESSAGES
-        .get(study_day, INITIAL_ASSISTANT_MESSAGES[1])
-        .replace("{NAME_PART}", name_part)
-    )
+    message = INITIAL_ASSISTANT_MESSAGES.get(study_day, INITIAL_ASSISTANT_MESSAGES[1]).replace("{NAME_PART}", name_part)
+    return message.replace("Hallo ,", "Hallo").replace("Hallo  ", "Hallo ")
 
 
 def ask_mistral(chat_history, study_day):
@@ -731,19 +730,17 @@ def load_chat():
         if not chat_history:
             now = utc_now_iso()
             reply = get_initial_assistant_message(study_day, chat_history)
-initial_entry = {
-    "role": "assistant",
-    "content": reply,
-    "timestamp": now,
-    "study_day": study_day
-}
-
-if int(study_day) == 5:
-    initial_entry["conversation_closed_at"] = now
-    initial_entry["is_closing_message"] = True
-
-chat_history.append(initial_entry)
-
+            initial_entry = {
+                "role": "assistant",
+                "content": reply,
+                "timestamp": now,
+                "chat_started_at": now,
+                "study_day": study_day
+            }
+            if int(study_day) == 5:
+                initial_entry["conversation_closed_at"] = now
+                initial_entry["is_closing_message"] = True
+            chat_history.append(initial_entry)
             save_chat_history_to_seafile(chat_history, study_day)
 
         # An den Browser wird nur der aktuelle Tag zurückgegeben.
@@ -776,13 +773,17 @@ def start_chat():
 
         now = utc_now_iso()
         reply = get_initial_assistant_message(study_day, chat_history)
-        chat_history.append({
+        initial_entry = {
             "role": "assistant",
             "content": reply,
             "timestamp": now,
             "chat_started_at": now,
             "study_day": study_day
-        })
+        }
+        if int(study_day) == 5:
+            initial_entry["conversation_closed_at"] = now
+            initial_entry["is_closing_message"] = True
+        chat_history.append(initial_entry)
         save_chat_history_to_seafile(chat_history, study_day)
 
         return jsonify({
@@ -929,3 +930,4 @@ def test_models():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
+
