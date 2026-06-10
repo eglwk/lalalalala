@@ -39,7 +39,7 @@ DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
 CONVERSATION_DURATION_SECONDS = int(
     os.environ.get(
         "CONVERSATION_DURATION_SECONDS",
-        str(int(float(os.environ.get("CONVERSATION_DURATION_MINUTES", "7.5")) * 60))
+        str(int(float(os.environ.get("CONVERSATION_DURATION_MINUTES", "1.5")) * 60))
     )
 )
 
@@ -47,7 +47,7 @@ CONVERSATION_DURATION_SECONDS = int(
 DAY_SWITCH_PAUSE_SECONDS = int(
     os.environ.get(
         "DAY_SWITCH_PAUSE_SECONDS",
-        str(int(float(os.environ.get("DAY_SWITCH_PAUSE_MINUTES", "2")) * 60))
+        str(int(float(os.environ.get("DAY_SWITCH_PAUSE_MINUTES", "1")) * 60))
     )
 )
 
